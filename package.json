@@ -1,0 +1,15 @@
+{
+  "name": "bleno-kibo",
+  "version": "0.1.0",
+  "author": "Wouter Hisschemöller <info@hisschemoller.com>",
+  "description": "Simulation of a Kibo using the bleno Node module.",
+  "license": "MIT",
+  "dependencies": {
+      "bleno": "github:notjosh/bleno#inject-bindings",
+      "bleno-mac": "github:notjosh/bleno-mac",
+      "xpc-connection": "github:sandeepmistry/node-xpc-connection#pull/26/head"
+  },
+  "scripts": {
+    "start": "node node-app/main.js"
+  }
+}
