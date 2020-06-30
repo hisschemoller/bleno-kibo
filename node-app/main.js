@@ -1,6 +1,17 @@
 console.log('main');
 const bleService = require('./ble-service');
+const express = require('express');
+const app = express();
+const port = process.env.PORT || 3014;
+const server = require('http').createServer(app);
+const io = require('socket.io').listen(server);
 
-const midiServiceUUID = '03B80E5A-EDE8-4B33-A751-6CE34EC4C700';
-const midiCharacteristicUUID = '7772E5DB-3868-4112-A1A9-F2669D106BF3';
-const connectionInterval = 15; // 15ms or less
+server.listen(port, () => {
+  console.log('listening on %d', port);
+});
+
+app.get('public/', function (req, res) {
+  res.sendFile(__dirname + 'index.html');
+});
+
+app.use(express.static('public'));
