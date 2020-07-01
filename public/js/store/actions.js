@@ -1,3 +1,4 @@
+import { NOTE_OFF } from '../midi/midi.js';
 
 const RECEIVE_MIDI_NOTE = 'RECEIVE_MIDI_NOTE';
 const SELECT_MIDI_INPUT = 'SELECT_MIDI_INPUT';
@@ -9,8 +10,18 @@ const UPDATE_MIDI_PORTS = 'UPDATE_MIDI_PORTS';
 export default {
 
   RECEIVE_MIDI_NOTE,
-  receiveMIDINote: data => ({ type: RECEIVE_MIDI_NOTE, data }),
+  receiveMIDINote: data => {
+    return (dispatch, getState, getActions) => {
 
+      // 0 for Note Off velocity
+      if (data[0] === NOTE_OFF) {
+        data[2] = 0;
+      }
+
+      return{ type: RECEIVE_MIDI_NOTE, data };
+    };
+  },
+  
   SELECT_MIDI_INPUT,
   selectMIDIInput: name => ({ type: SELECT_MIDI_INPUT, name, }),
 

@@ -36,25 +36,18 @@ bleno.on('advertisingStart', function(error) {
   }
 });
 
-const noteOn = 0x90;
-const noteOff = 0x80;
-const pitch = 60;
-const velocity = 110;
-let isOn = true;
-
-exports.sendMIDI = function() {
-  console.log('sendMIDI called');
-  if (!characteristic._updateValueCallback) {
+exports.sendMIDI = function(midiMessage) {
+  console.log('sendMIDI midiMessage', midiMessage);
+  if (!characteristic || !characteristic._updateValueCallback) {
     return;
   }
   const data = Buffer.alloc(5);
   data.writeUInt8(0x80, 0);
   data.writeUInt8(0x80, 1);
-  data.writeUInt8(isOn ? noteOn : noteOff , 2);
-  data.writeUInt8(pitch, 3);
-  data.writeUInt8(velocity, 4);
-  isOn = !isOn;
-  console.log('sendMIDI', isOn);
+  data.writeUInt8(midiMessage[0], 2);
+  data.writeUInt8(midiMessage[1], 3);
+  data.writeUInt8(midiMessage[2], 4);
+  console.log('sendMIDI', data);
   characteristic._updateValueCallback(data);
 }
 

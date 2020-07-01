@@ -17,9 +17,8 @@ function handleStateChanges(e) {
 }
 
 function uploadNote(state) {
-  console.log(socket);
-  socket.emit('midimessage', {
-    midi: state.midiMessage,
+  socket.emit('midi-message', {
+    midiMessage: state.midiMessage,
   });
 }
 

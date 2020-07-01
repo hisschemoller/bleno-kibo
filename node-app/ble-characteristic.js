@@ -43,31 +43,31 @@ CustomCharacteristic.prototype.onUnsubscribe = function() {
   this._updateValueCallback = null;
 };
 
-const noteOn = 0x90;
-const noteOff = 0x80;
-const pitch = 60;
-const velocity = 110;
-let isOn = true;
+// const noteOn = 0x90;
+// const noteOff = 0x80;
+// const pitch = 60;
+// const velocity = 110;
+// let isOn = true;
 
-function delayedNotification(callback) {
-  setTimeout(function() { 
-    if (isSubscribed) {
-      // var data = Buffer.alloc(3);
-      // var now = new Date();
-      // data.writeUInt8(now.getHours(), 0);
-      // data.writeUInt8(now.getMinutes(), 1);
-      // data.writeUInt8(now.getSeconds(), 2);
-      // byte midiData[] = {0x80, 0x80, 0x00, 0x00, 0x00};
-      var data = Buffer.alloc(5);
-      data.writeUInt8(0x80, 0);
-      data.writeUInt8(0x80, 1);
-      data.writeUInt8(isOn ? noteOn : noteOff , 2);
-      data.writeUInt8(pitch, 3);
-      data.writeUInt8(velocity, 4);
-      isOn = !isOn;
-      console.log('callback', data);
-      callback(data);
-      delayedNotification(callback);
-    }
-  }, notifyInterval * 1000);
-}
+// function delayedNotification(callback) {
+//   setTimeout(function() { 
+//     if (isSubscribed) {
+//       // var data = Buffer.alloc(3);
+//       // var now = new Date();
+//       // data.writeUInt8(now.getHours(), 0);
+//       // data.writeUInt8(now.getMinutes(), 1);
+//       // data.writeUInt8(now.getSeconds(), 2);
+//       // byte midiData[] = {0x80, 0x80, 0x00, 0x00, 0x00};
+//       var data = Buffer.alloc(5);
+//       data.writeUInt8(0x80, 0);
+//       data.writeUInt8(0x80, 1);
+//       data.writeUInt8(isOn ? noteOn : noteOff , 2);
+//       data.writeUInt8(pitch, 3);
+//       data.writeUInt8(velocity, 4);
+//       isOn = !isOn;
+//       console.log('callback', data);
+//       callback(data);
+//       delayedNotification(callback);
+//     }
+//   }, notifyInterval * 1000);
+// }
