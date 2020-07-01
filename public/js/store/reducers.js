@@ -1,7 +1,8 @@
 
 const initialState = {
+  isBLEAdvertising: false,
   midiInputs: [],
-  midiMessage: {},
+  midiMessage: null,
   midiOutputs: [],
   midiSelectedOutput: null,
 };
@@ -14,16 +15,23 @@ const initialState = {
  */
 export default function reduce(state = initialState, action, actions = {}) {
   switch (action.type) {
-    case actions.SEND_MIDI_MESSAGE:
+
+    case actions.RECEIVE_MIDI_NOTE:
       return {
         ...state,
-        midiMessage: { ...action.data },
+        midiMessage: action.data,
       };
 
     case actions.SELECT_MIDI_INPUT:
       return {
         ...state,
         midiSelectedInput: action.name,
+      };
+
+    case actions.TOGGLE_BLE:
+      return {
+        ...state,
+        isBLEAdvertising: action.value,
       };
 
     case actions.UPDATE_MIDI_PORTS: {

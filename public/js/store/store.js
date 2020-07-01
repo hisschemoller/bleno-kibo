@@ -15,7 +15,6 @@ export function dispatch(action) {
     }
   } else {
     const state = reduce(currentState, action, actions);
-    console.log(action.type, state);
     memoize(state, action, actions);
     currentState = state;
     document.dispatchEvent(new CustomEvent(STATE_CHANGE, { detail: {

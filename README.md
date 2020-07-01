@@ -14,4 +14,6 @@ https://punchthrough.com/how-to-use-node-js-to-speed-up-ble-app-development/
   - https://tigoe.github.io/SoundExamples/midi-ble.html
 - MIDI BLE Tutorial
   - https://learn.sparkfun.com/tutorials/midi-ble-tutorial/create-a-basic-ble-peripheral
+- Bleno
+  - https://github.com/noble/bleno
   

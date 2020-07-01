@@ -1,17 +1,29 @@
 import { dispatch, getActions, getState, STATE_CHANGE, } from '../store/store.js';
 
-let rootEl, inputEl;
+let rootEl, inputEl, startBtn, stopBtn;
 let resetKeyCombo = [];
 
 export function setup() {
   rootEl = document.querySelector('#controls');
   inputEl = rootEl.querySelector('#midi-inputs');
+  startBtn = rootEl.querySelector('#btn-ble-start');
+  stopBtn = rootEl.querySelector('#btn-ble-stop');
 
   addEventListeners();
 }
 
 function addEventListeners() {
   document.addEventListener(STATE_CHANGE, handleStateChanges);
+
+  inputEl.addEventListener('change', e => {
+    dispatch(getActions().selectMIDIInput(e.target.value));
+  });
+  startBtn.addEventListener('click', e => {
+    dispatch(getActions().toggleBLE(true));
+  });
+  stopBtn.addEventListener('click', e => {
+    dispatch(getActions().toggleBLE(false));
+  });
 
   document.addEventListener('keydown', e => {
 
@@ -48,10 +60,6 @@ function addEventListeners() {
     }
 
     resetKeyCombo.length = 0;
-  });
-
-  inputEl.addEventListener('change', e => {
-    dispatch(getActions().selectMIDIInput(e.target.value));
   });
 }
 

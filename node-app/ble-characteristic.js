@@ -33,7 +33,7 @@ CustomCharacteristic.prototype.onWriteRequest = function(data, offset, withoutRe
 CustomCharacteristic.prototype.onSubscribe = function(maxValueSize, updateValueCallback) {
   console.log('CustomCharacteristic - onSubscribe');
   isSubscribed = true;
-  delayedNotification(updateValueCallback);
+  // delayedNotification(updateValueCallback);
   this._updateValueCallback = updateValueCallback;
 };
 
@@ -65,10 +65,9 @@ function delayedNotification(callback) {
       data.writeUInt8(pitch, 3);
       data.writeUInt8(velocity, 4);
       isOn = !isOn;
+      console.log('callback', data);
       callback(data);
       delayedNotification(callback);
     }
   }, notifyInterval * 1000);
 }
-
-
