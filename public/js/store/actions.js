@@ -1,5 +1,8 @@
 import { NOTE_OFF } from '../midi/midi.js';
 
+const lpd8 = [37, 38, 46, 44, 35, 36, 42, 39];
+const kibo = [67, 69, 71, 72, 60, 62, 64, 65];
+
 const RECEIVE_MIDI_NOTE = 'RECEIVE_MIDI_NOTE';
 const SELECT_MIDI_INPUT = 'SELECT_MIDI_INPUT';
 const SET_PARAMETER = 'SET_PARAMETER';
@@ -13,7 +16,19 @@ export default {
   receiveMIDINote: data => {
     return (dispatch, getState, getActions) => {
 
-      // 0 for Note Off velocity
+      // translate my Akai LPD8 to Kodaly Kibo
+      // LPD 8
+      // pads left to right, top to bottom
+      // top row, note pitch 37, 38, 46, 44
+      // btm row, note pitch 35, 36, 42, 39
+      // Kibo
+      // buttons left to right, top to bottom
+      // top row, note pitch 67, 69, 71, 72
+      // btm row, note pitch 60, 62, 64, 65
+      // on a single MIDI channel
+      data[1] = kibo[lpd8.indexOf(data[1])];
+
+      // set Note Off velocity to 0
       if (data[0] === NOTE_OFF) {
         data[2] = 0;
       }
