@@ -5,6 +5,7 @@ const kibo = [67, 69, 71, 72, 60, 62, 64, 65];
 
 const RECEIVE_MIDI_NOTE = 'RECEIVE_MIDI_NOTE';
 const SELECT_MIDI_INPUT = 'SELECT_MIDI_INPUT';
+const SELECT_MIDI_OUTPUT = 'SELECT_MIDI_OUTPUT';
 const SET_PARAMETER = 'SET_PARAMETER';
 const TOGGLE_BLE = 'TOGGLE_BLE';
 const UPDATE_MIDI_PORTS = 'UPDATE_MIDI_PORTS';
@@ -39,6 +40,9 @@ export default {
   
   SELECT_MIDI_INPUT,
   selectMIDIInput: name => ({ type: SELECT_MIDI_INPUT, name, }),
+  
+  SELECT_MIDI_OUTPUT,
+  selectMIDIOutput: name => ({ type: SELECT_MIDI_OUTPUT, name, }),
 
   SET_PARAMETER,
   setParameter: (id, name, value, valueNormal) => ({ type: SET_PARAMETER, id, name, value, valueNormal, }),

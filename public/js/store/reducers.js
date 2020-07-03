@@ -4,6 +4,7 @@ const initialState = {
   midiInputs: [],
   midiMessage: null,
   midiOutputs: [],
+  midiSelectedInput: null,
   midiSelectedOutput: null,
 };
 
@@ -26,6 +27,12 @@ export default function reduce(state = initialState, action, actions = {}) {
       return {
         ...state,
         midiSelectedInput: action.name,
+      };
+
+    case actions.SELECT_MIDI_OUTPUT:
+      return {
+        ...state,
+        midiSelectedOutput: action.name,
       };
 
     case actions.TOGGLE_BLE:

@@ -12,6 +12,7 @@ const NOTE_DURATION = 300;
 
 let midiAccess = null;
 let midiInput = null;
+let midiOutput = null;
 
 export function accessMidi() { 
   return new Promise((resolve, reject) => {
@@ -50,6 +51,7 @@ export function setup() {
   }
 
   dispatch(getActions().updateMIDIPorts(inputNames, 'input'));
+  dispatch(getActions().updateMIDIPorts(outputNames, 'output'));
 
   midiAccess.onstatechange = onAccessStateChange;
 }
@@ -73,9 +75,16 @@ function handleStateChanges(e) {
   switch (action.type) {
 
     case actions.SELECT_MIDI_INPUT:
-    case actions.SET_PROJECT:
+      selectMIDIInput(state);
+      break;
+
+    case actions.SELECT_MIDI_OUTPUT:
+      selectMIDIOutput(state);
+      break;
+
     case actions.UPDATE_MIDI_PORTS:
       selectMIDIInput(state);
+      selectMIDIOutput(state);
       break;
   }
 }
@@ -109,6 +118,18 @@ function selectMIDIInput(state) {
       midiInput = port.value;
       console.log('selectMIDIInput', port);
       midiInput.onmidimessage = onMIDIMessage;
+    }
+  }
+}
+
+function selectMIDIOutput(state) {
+  console.log('selectMIDIOutput');
+  midiOutput = null;
+  const outputs = midiAccess.outputs.values();
+  for (let port = outputs.next(); port && !port.done; port = outputs.next()) {
+    if (port.value.name === state.midiSelectedOutput) {
+      midiOutput = port.value;
+      console.log('selectMIDIOutput', port);
     }
   }
 }

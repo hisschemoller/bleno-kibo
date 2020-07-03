@@ -7,19 +7,29 @@
 		<link rel="stylesheet" href="css/style.css">
   </head>
   <body>
+    <h3>bleno-kibo</h3>
     <div id="controls">
       <div>
         <button type="button" id="btn-ble-start">BLE Start Advertising</button>
         <button type="button" id="btn-ble-stop">BLE Stop Advertising</button>
       </div>
-      <label>
-        <span>MIDI Input</span>
-        <select id="midi-inputs">
-          <option value="">No input selected</option>
-        </select>
-      </label>
+      <div>
+        <label>
+          <span>MIDI Input</span>
+          <select id="midi-inputs">
+            <option value="">No input selected</option>
+          </select>
+        </label>
+      </div>
+      <div>
+        <label>
+          <span>MIDI Output</span>
+          <select id="midi-outputs">
+            <option value="">No output selected</option>
+          </select>
+        </label>
+      </div>
     </div>
-    bleno-kibo
     <script src="js/lib/socket.io.js"></script>
     <script src="js/main.js" type="module"></script>
 	</body>
