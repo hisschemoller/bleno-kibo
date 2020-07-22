@@ -10,8 +10,10 @@ let characteristic = null;
 let isPoweredOn = false;
 
 bleno.on('stateChange', function(state) {
-  console.log(`%c on -> stateChange! ${state}`, 'color: #ffcc33');
+  console.log(`>>> Service on -> stateChange! ${state}`);
   isPoweredOn = state === 'poweredOn';
+
+  // // immediately start advertising
   // if (state === 'poweredOn') {
   //   console.log("request startAdvertising");
   //   bleno.startAdvertising(name, [midiServiceUUID]);
@@ -23,7 +25,7 @@ bleno.on('stateChange', function(state) {
 
 bleno.on('advertisingStart', function(error) {
   characteristic = new CustomCharacteristic();
-  console.log('on -> advertisingStart: ' + (error ? 'error ' + error : 'success'));
+  console.log('>>> Service on -> advertisingStart: ' + (error ? 'error ' + error : 'success'));
   if (!error) {
     bleno.setServices([
       new BlenoPrimaryService({
@@ -37,7 +39,11 @@ bleno.on('advertisingStart', function(error) {
 });
 
 exports.sendMIDI = function(midiMessage) {
-  console.log('sendMIDI midiMessage', midiMessage);
+  console.log('>>> Service sendMIDI midiMessage', midiMessage);
+  console.log('>>> Service characteristic', !!characteristic);
+  if (characteristic) {
+    console.log('>>> Service _updateValueCallback', characteristic._updateValueCallback);
+  }
   if (!characteristic || !characteristic._updateValueCallback) {
     return;
   }
@@ -47,19 +53,20 @@ exports.sendMIDI = function(midiMessage) {
   data.writeUInt8(midiMessage[0], 2);
   data.writeUInt8(midiMessage[1], 3);
   data.writeUInt8(midiMessage[2], 4);
-  console.log('sendMIDI', data);
+  console.log('>>> Service sendMIDI', data);
   characteristic._updateValueCallback(data);
 }
 
 exports.toggleAdvertising = isAdvertising => {
+  console.log(">>> Service toggleAdvertising isPoweredOn", isPoweredOn);
   if (!isPoweredOn) {
     return;
   }
   if (isAdvertising) {
-    console.log("request startAdvertising");
+    console.log(">>> Service request startAdvertising");
     bleno.startAdvertising(name, [midiServiceUUID]);
   } else {
-    console.log("request stopAdvertising");
+    console.log(">>> Service request stopAdvertising");
     bleno.stopAdvertising();
   }
 }

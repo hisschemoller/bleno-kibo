@@ -1,0 +1,17 @@
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+body {
+  font-family: sans-serif;
+  margin: 0;
+}
+#app {
+  margin: 20px;
+}
+#controls > div {
+  margin-bottom: 10px;
+}
+#controls label > span {
+  display: inline-block;
+  width: 100px;
+}

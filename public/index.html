@@ -1,33 +1,35 @@
 <!doctype html>
 <html lang="en">
 	<head>
-		<title>bleno-kibo</title>
+		<title>Bleno-Kibo</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 		<link rel="stylesheet" href="css/style.css">
   </head>
   <body>
-    <h3>bleno-kibo</h3>
-    <div id="controls">
-      <div>
-        <button type="button" id="btn-ble-start">BLE Start Advertising</button>
-        <button type="button" id="btn-ble-stop">BLE Stop Advertising</button>
-      </div>
-      <div>
-        <label>
-          <span>MIDI Input</span>
-          <select id="midi-inputs">
-            <option value="">No input selected</option>
-          </select>
-        </label>
-      </div>
-      <div>
-        <label>
-          <span>MIDI Output</span>
-          <select id="midi-outputs">
-            <option value="">No output selected</option>
-          </select>
-        </label>
+    <div id="app">
+      <h3>Bleno-Kibo</h3>
+      <div id="controls">
+        <div>
+          <button type="button" id="btn-ble-start">BLE Start Advertising</button>
+          <button type="button" id="btn-ble-stop">BLE Stop Advertising</button>
+        </div>
+        <div>
+          <label>
+            <span>MIDI Input</span>
+            <select id="midi-inputs">
+              <option value="">No input selected</option>
+            </select>
+          </label>
+        </div>
+        <div>
+          <label>
+            <span>MIDI Output</span>
+            <select id="midi-outputs">
+              <option value="">No output selected</option>
+            </select>
+          </label>
+        </div>
       </div>
     </div>
     <script src="js/lib/socket.io.js"></script>

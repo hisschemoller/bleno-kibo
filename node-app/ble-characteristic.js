@@ -6,6 +6,7 @@ const notifyInterval = 5; // seconds
 let isSubscribed = false;
 
 const CustomCharacteristic = function() {
+  console.log('>>> CustomCharacteristic constructor');
   CustomCharacteristic.super_.call(this, {
       uuid: midiCharacteristicUUID,
       properties: ['read', 'write', 'notify'],
@@ -18,7 +19,7 @@ util.inherits(CustomCharacteristic, BlenoCharacteristic);
 module.exports = CustomCharacteristic;
 
 CustomCharacteristic.prototype.onReadRequest = function (offset, callback) {
-  console.log('CustomCharacteristic onReadRequest');
+  console.log('>>> CustomCharacteristic onReadRequest');
   var data = Buffer.alloc(1);
   data.writeUInt8(42, 0);
   callback(this.RESULT_SUCCESS, data);
@@ -26,19 +27,19 @@ CustomCharacteristic.prototype.onReadRequest = function (offset, callback) {
 
 CustomCharacteristic.prototype.onWriteRequest = function(data, offset, withoutResponse, callback) {
   this._value = data;
-  console.log('CustomCharacteristic - onWriteRequest: value = ' + this._value.toString('hex'));
+  console.log('>>> CustomCharacteristic - onWriteRequest: value = ' + this._value.toString('hex'));
   callback(this.RESULT_SUCCESS);
 };
 
 CustomCharacteristic.prototype.onSubscribe = function(maxValueSize, updateValueCallback) {
-  console.log('CustomCharacteristic - onSubscribe');
+  console.log('>>> CustomCharacteristic - onSubscribe');
   isSubscribed = true;
   // delayedNotification(updateValueCallback);
   this._updateValueCallback = updateValueCallback;
 };
 
 CustomCharacteristic.prototype.onUnsubscribe = function() {
-  console.log('CustomCharacteristic - onUnsubscribe');
+  console.log('>>> CustomCharacteristic - onUnsubscribe');
   isSubscribed = false;
   this._updateValueCallback = null;
 };
