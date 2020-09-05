@@ -27,7 +27,9 @@ export default {
       // top row, note pitch 67, 69, 71, 72
       // btm row, note pitch 60, 62, 64, 65
       // on a single MIDI channel
-      data[1] = kibo[lpd8.indexOf(data[1])];
+
+      // not needed anymore because the lpd8 is reprogrammed with the correct pitches
+      // data[1] = kibo[lpd8.indexOf(data[1])];
 
       // set Note Off velocity to 0
       if (data[0] === NOTE_OFF) {
