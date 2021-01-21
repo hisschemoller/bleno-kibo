@@ -8,7 +8,7 @@
       "bleno": "github:notjosh/bleno#inject-bindings",
       "bleno-mac": "github:notjosh/bleno-mac",
       "express": "^4.17.1",
-      "socket.io": "^2.3.0",
+      "socket.io": "^2.4.0",
       "xpc-connection": "github:sandeepmistry/node-xpc-connection#pull/26/head"
   },
   "scripts": {
